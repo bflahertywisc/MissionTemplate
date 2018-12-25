@@ -1,19 +1,18 @@
-fnc_InitWest = {
+ _fnc_InitWest = {
+ sleep 2;
 //---Settings----
-
-//Outfit
+//Helmets
 _allowedHelmets=["CUP_H_CDF_H_PASGT_UN","CUP_H_CDF_OfficerCap_UN"];
-_allowedUniforms=["U_C_Man_casual_2_F","U_C_Man_casual_1_F","CUP_U_O_CHDKZ_Lopotev","U_C_Poloshirt_blue","U_C_Poloshirt_tricolour","U_Rangemaster","U_C_Man_casual_4_F"];
-
-//
-
 
 //---End Settings---
+
+
 params ["_unit","_class"];
 
-// Set Outfit 
-removeUniform _unit;
-_uniform = selectRandom _allowedUniforms;
-_unit forceAddUniform _uniform;
+// Set Helmet 
+	removeHeadgear _unit;
+	_helmet = selectRandom _allowedHelmets;
+	diag_log format ["Solder %1 is getting helmet %2 on side %3", _unit, _helmet];
+	_unit addHeadgear _helmet;
 
 };

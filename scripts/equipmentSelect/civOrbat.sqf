@@ -1,3 +1,3 @@
-fnc_InitCiv = {
-params ["_unit","_class"];
+_fnc_InitCiv = {
+
 };
