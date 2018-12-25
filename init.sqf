@@ -61,24 +61,25 @@ _fnc_ititializeSoldier = {
     _class = typeOf _unit;
     _side = side _unit;
     _sideString = str _side;
+    _local =  local _unit ;
 
-	diag_log format ["Initializing Soldier %1 with class %2 on side %3", _unit, _class, _sideString];
+	diag_log format ["Initializing Soldier %1 with class %2 on side %3, Local?: %4", _unit, _class, _sideString, _local];
 
 		switch (_sideString) do {
-	    case "EAST": { 
-	    	[_unit,_class] call _fnc_InitEast;
-	    };
-	    case "WEST": {
-	   		[_unit,_class] call _fnc_InitWest;
-	    };
-	    case "GUER": {
-	   		[_unit,_class] call _fnc_InitGuer;
-	    };
-	    case "CIV": {  
-	    	[_unit,_class] call _fnc_InitCiv;
-	    };
-	    default {};
-	};
+		    case "EAST": { 
+		   		[_unit,_class] remoteExec ["fnc_InitEast",_unit];
+		    };
+		    case "WEST": {
+		   		[_unit,_class] remoteExec ["fnc_InitWest",_unit];
+		    };
+		    case "GUER": {
+		   		[_unit,_class] remoteExec ["fnc_InitGuer",_unit];
+		    };
+		    case "CIV": {  
+		   		[_unit,_class] remoteExec ["fnc_IniCiv",_unit];
+		    };
+		    default {};
+		};
 }; 
 
 ["CAManBase", "InitPost", _fnc_ititializeSoldier, nil, nil, true] call CBA_fnc_addClassEventHandler;

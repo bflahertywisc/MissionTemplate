@@ -1,4 +1,4 @@
-_fnc_InitEast = {
+fnc_InitEast = {
 params ["_unit","_class"];
 
 };
