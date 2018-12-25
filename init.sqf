@@ -3,6 +3,18 @@
 #include "scripts\equipmentSelect\westOrbat.sqf";
 #include "scripts\equipmentSelect\eastOrbat.sqf";
 
+//-----Settings ------
+
+missionNamespace setVariable ["allowedHelmetsWest",["CUP_H_CDF_H_PASGT_UN"]];
+missionNamespace setVariable ["allowedUniformsWest",["U_C_Man_casual_2_F","U_C_Man_casual_1_F","CUP_U_O_CHDKZ_Lopotev","U_C_Poloshirt_blue","U_C_Poloshirt_tricolour","U_Rangemaster","U_C_Man_casual_4_F"]];
+
+
+
+//-----End Settings ------
+
+
+
+
 
 // Plank Config
 call compile preprocessFileLineNumbers "plank\plank_init.sqf";
@@ -63,7 +75,7 @@ _fnc_ititializeSoldier = {
     _sideString = str _side;
     _local =  local _unit ;
 
-	diag_log format ["Initializing Soldier %1 with class %2 on side %3, Local?: %4", _unit, _class, _sideString, _local];
+	//diag_log format ["Initializing Soldier %1 with class %2 on side %3, Local?: %4", _unit, _class, _sideString, _local];
 
 		switch (_sideString) do {
 		    case "EAST": { 
