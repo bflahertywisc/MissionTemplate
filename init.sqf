@@ -75,7 +75,7 @@ _fnc_ititializeSoldier = {
     _side = side _unit;
     _sideString = str _side;
     _local =  local _unit ;
-   _class = [_rawClass] call fnc_classLookup;
+   _class = [_rawClass,_sideString] call fnc_classLookup;
 
 	//diag_log format ["Initializing Soldier %1 with class %2 on side %3, Local?: %4", _unit, _class, _sideString, _local];
 
