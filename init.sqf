@@ -2,6 +2,7 @@
 #include "scripts\equipmentSelect\civOrbat.sqf";
 #include "scripts\equipmentSelect\westOrbat.sqf";
 #include "scripts\equipmentSelect\eastOrbat.sqf";
+#include "scripts\equipmentSelect\classLookup.sqf";
 
 //-----Settings ------
 
@@ -70,10 +71,11 @@ private _fnc_addLootAction = {
 _fnc_ititializeSoldier = {
 
     params ["_unit"];
-    _class = typeOf _unit;
+    _rawClass = typeOf _unit;
     _side = side _unit;
     _sideString = str _side;
     _local =  local _unit ;
+   _class = [_rawClass] call fnc_classLookup;
 
 	//diag_log format ["Initializing Soldier %1 with class %2 on side %3, Local?: %4", _unit, _class, _sideString, _local];
 
@@ -100,7 +102,7 @@ _fnc_ititializeSoldier = {
 //Add Recruit Action
 
 
-private _fnc_addRecruitAction = {
+fnc_addRecruitAction = {
     params ["_unit"];
     if (!local _unit) exitWith {};
 
@@ -139,6 +141,6 @@ fnc_make_classbox = {
 };
 
 
-["B_Survivor_F", "InitPost", _fnc_addRecruitAction, nil, nil, true] call CBA_fnc_addClassEventHandler;
-["B_Survivor_F", "Respawn", _fnc_addRecruitAction] call CBA_fnc_addClassEventHandler;
+//["B_Survivor_F", "InitPost", _fnc_addRecruitAction, nil, nil, true] call CBA_fnc_addClassEventHandler;
+//["B_Survivor_F", "Respawn", _fnc_addRecruitAction] call CBA_fnc_addClassEventHandler;
 
