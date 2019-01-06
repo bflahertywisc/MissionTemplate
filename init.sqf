@@ -8,7 +8,8 @@
 
 missionNamespace setVariable ["allowedHelmetsWest",["CUP_H_CDF_H_PASGT_UN"]];
 missionNamespace setVariable ["allowedUniformsWest",["U_C_Man_casual_2_F","U_C_Man_casual_1_F","CUP_U_O_CHDKZ_Lopotev","U_C_Poloshirt_blue","U_C_Poloshirt_tricolour","U_Rangemaster","U_C_Man_casual_4_F"]];
-
+missionNamespace setVariable ["allowedHelmetsEast",["CUP_H_RUS_6B27"]];
+missionNamespace setVariable ["allowedUniformsEast",["U_C_Poloshirt_burgundy","U_C_Poloshirt_redwhite","CUP_B_USMC_Navy_Red","U_C_Man_casual_6_F"]];
 
 
 //-----End Settings ------
@@ -33,9 +34,9 @@ ManHours = 120, publicVariable "ManHours";
 call compile preprocessFileLineNumbers "plank\plank_init.sqf";
 
 
-//Add Loot Action
+//Add Med Action
 
-private _fnc_addLootAction = {
+private _fnc_addMedLootAction = {
     params ["_unit"];
     if (!local _unit) exitWith {};
 
@@ -61,8 +62,9 @@ private _fnc_addLootAction = {
     ]] remoteExec ["addAction"];
 };
 
-["CAManBase", "InitPost", _fnc_addLootAction, nil, nil, true] call CBA_fnc_addClassEventHandler;
-["CAManBase", "Respawn", _fnc_addLootAction] call CBA_fnc_addClassEventHandler;
+["CAManBase", "InitPost", _fnc_addMedLootAction, nil, nil, true] call CBA_fnc_addClassEventHandler;
+["CAManBase", "Respawn", _fnc_addMedLootAction] call CBA_fnc_addClassEventHandler;
+
 
 
 
@@ -94,6 +96,33 @@ _fnc_ititializeSoldier = {
 		    };
 		    default {};
 		};
+
+	    unitClass =_unit getVariable ['class', 'rifle'];
+
+    [_unit, [
+        format ["Switch to %1", _class],
+        {
+            params ["_target", "_caller", "_actionId", "_arguments"];
+
+            _targetClass = _target getVariable ['class','rifle'];
+            _callerClass = _caller getVariable ['class','rifle'];
+            [_caller,_targetClass] remoteExec ["fnc_SetWeaponWest",_caller];
+            _target setVariable ["commy_isLooted", true, true];
+            _caller setVariable ["class",_targetClass, true];
+            _target setVariable ["class","empty", true];
+            diag_log format ["Class Switch %1 to %2", _callerClass, _targetClass];
+        },
+        nil,
+        1.5,
+        false,
+        true,
+        "",
+        "!alive _target && {(_target getVariable ['class', 'empty'])!='empty'} && {(_target getVariable ['class','rifle'])!=(_this getVariable ['class','rifle'])} ",
+        50,
+        false,
+        "",
+        ""
+    ]] remoteExec ["addAction"];
 }; 
 
 ["CAManBase", "InitPost", _fnc_ititializeSoldier, nil, nil, true] call CBA_fnc_addClassEventHandler;

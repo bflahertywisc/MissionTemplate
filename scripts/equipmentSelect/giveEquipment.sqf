@@ -1,7 +1,7 @@
 params ["_unit", "_classArray"];
 if (!local _unit) exitWith {};
 _class = _classArray select 0;
-_unit setVariable ["Class", _class, true];
+_unit setVariable ["class", _class, true];
 _uniform = floor random 5;
 hint format ["Uniform: %1",_uniform];
 switch (_uniform) do {
