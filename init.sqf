@@ -110,7 +110,6 @@ _fnc_ititializeSoldier = {
             _target setVariable ["commy_isLooted", true, true];
             _caller setVariable ["class",_targetClass, true];
             _target setVariable ["class","empty", true];
-            diag_log format ["Class Switch %1 to %2", _callerClass, _targetClass];
         },
         nil,
         1.5,
@@ -118,6 +117,28 @@ _fnc_ititializeSoldier = {
         true,
         "",
         "!alive _target && {(_target getVariable ['class', 'empty'])!='empty'} && {(_target getVariable ['class','rifle'])!=(_this getVariable ['class','rifle'])} ",
+        50,
+        false,
+        "",
+        ""
+    ]] remoteExec ["addAction"];
+
+        [_unit, [
+        format ["Resupply for %1", _class],
+        {
+            params ["_target", "_caller", "_actionId", "_arguments"];
+
+            _targetClass = _target getVariable ['class','rifle'];
+            _callerClass = _caller getVariable ['class','rifle'];
+            [_caller,_targetClass] remoteExec ["fnc_AddAmmoWest",_caller];
+            _target setVariable ["class","empty", true];
+        },
+        nil,
+        1.5,
+        false,
+        true,
+        "",
+        "!alive _target && {(_target getVariable ['class', 'empty'])!='empty'} && {(_target getVariable ['class','rifle'])==(_this getVariable ['class','rifle'])} ",
         50,
         false,
         "",
