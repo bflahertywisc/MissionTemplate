@@ -1,6 +1,5 @@
 fnc_InitWest = {
 params ["_unit","_class"];
-
 if (!local _unit) exitWith {};
 
 _unit setVariable ["class", _class, true];
@@ -13,6 +12,7 @@ _unit setVariable ["class", _class, true];
 
 fnc_SetUniformWest = {
 	params ["_unit","_class"];
+	if (!local _unit) exitWith {};
 
 	removeUniform _unit;
 	removeVest _unit;
@@ -31,6 +31,7 @@ fnc_SetUniformWest = {
 
 fnc_SetWeaponWest = {
 	params ["_unit","_class"];
+	if (!local _unit) exitWith {};
 	removeAllWeapons _unit;
 	removeAllItems _unit;
 	removeAllAssignedItems _unit;

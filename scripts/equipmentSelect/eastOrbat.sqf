@@ -13,7 +13,7 @@ _unit setVariable ["class", _class, true];
 
 fnc_SetUniformEast = {
 	params ["_unit","_class"];
-
+if (!local _unit) exitWith {};
 	removeUniform _unit;
 	removeVest _unit;
 	removeBackpack _unit;
@@ -31,6 +31,7 @@ fnc_SetUniformEast = {
 
 fnc_SetWeaponEast = {
 	params ["_unit","_class"];
+if (!local _unit) exitWith {};
 	removeAllWeapons _unit;
 	removeAllItems _unit;
 	removeAllAssignedItems _unit;

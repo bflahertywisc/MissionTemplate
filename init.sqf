@@ -71,8 +71,8 @@ private _fnc_addMedLootAction = {
 //Soldier Loadout Overwrite
 
 _fnc_ititializeSoldier = {
-
     params ["_unit"];
+    if (!local _unit) exitWith {};
     _rawClass = typeOf _unit;
     _side = side _unit;
     _sideString = str _side;
