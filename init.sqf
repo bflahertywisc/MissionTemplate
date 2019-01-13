@@ -40,13 +40,13 @@ private _fnc_addMedLootAction = {
     params ["_unit"];
     if (!local _unit) exitWith {};
 
-    _unit setVariable ["commy_isLooted", false, true];
+    _unit setVariable ["medic_isLooted", false, true];
 
     [_unit, [
         "Take Medical Supplies",
         {
             params ["_target", "_caller", "_actionId", "_arguments"];
-            _target setVariable ["commy_isLooted", true, true];
+            _target setVariable ["medic_isLooted", true, true];
             _this execVM "scripts\loot\lootMedical.sqf";
         },
         nil,
@@ -54,7 +54,32 @@ private _fnc_addMedLootAction = {
         false,
         true,
         "",
-        "!alive _target && {!(_target getVariable ['commy_isLooted', false])}",
+        "!alive _target && {!(_target getVariable ['medic_isLooted', false])}",
+        50,
+        false,
+        "",
+        ""
+    ]] remoteExec ["addAction"];
+};
+
+fnc_addResupplyAction ={
+    params ["_unit"];
+    if (!local _unit) exitWith {};
+    _unit setVariable ["ammo_isLooted", false, true];
+    [_unit, [
+        format ["Resupply ammo"],
+        {
+            params ["_target", "_caller", "_actionId", "_arguments"];
+            _targetClass = _target getVariable ['class','rifle'];
+            _target setVariable ["ammo_isLooted", true, true];
+            [_caller,_targetClass] remoteExec ["fnc_AddAmmoWest",_caller];
+        },
+        nil,
+        1.5,
+        false,
+        true,
+        "",
+        "!alive _target && {(_target getVariable ['class','rifle'])==(_this getVariable ['class','rifle'])} && {!(_target getVariable ['ammo_isLooted', false])}",
         50,
         false,
         "",
@@ -65,7 +90,37 @@ private _fnc_addMedLootAction = {
 ["CAManBase", "InitPost", _fnc_addMedLootAction, nil, nil, true] call CBA_fnc_addClassEventHandler;
 ["CAManBase", "Respawn", _fnc_addMedLootAction] call CBA_fnc_addClassEventHandler;
 
+fnc_addClassSwitchAction ={
+	params ["_unit","_class"];	
 
+	if (!local _unit) exitWith {};
+
+    [_unit, [
+        format ["Switch to %1", _class],
+        {
+            params ["_target", "_caller", "_actionId", "_arguments"];
+
+            _targetClass = _target getVariable ['class','rifle'];
+            _callerClass = _caller getVariable ['class','rifle'];
+            [_caller,_targetClass] remoteExec ["fnc_SetWeaponWest",_caller];
+            _target setVariable ["medic_isLooted", true, true];
+            _caller setVariable ["class",_targetClass, true];
+            _target setVariable ["class",_callerClass, true];
+            _target removeAction _actionID;
+            [_target,_callerClass]remoteExec ["fnc_addClassSwitchAction"];
+        },
+        nil,
+        1.5,
+        false,
+        true,
+        "",
+        "!alive _target && {(_target getVariable ['class','rifle'])!=(_this getVariable ['class','rifle'])} ",
+        50,
+        false,
+        "",
+        ""
+    ]] remoteExec ["addAction"];
+};
 
 
 //Soldier Loadout Overwrite
@@ -76,7 +131,6 @@ _fnc_ititializeSoldier = {
     _rawClass = typeOf _unit;
     _side = side _unit;
     _sideString = str _side;
-    _local =  local _unit ;
    _class = [_rawClass,_sideString] call fnc_classLookup;
 
 	//diag_log format ["Initializing Soldier %1 with class %2 on side %3, Local?: %4", _unit, _class, _sideString, _local];
@@ -97,53 +151,9 @@ _fnc_ititializeSoldier = {
 		    default {};
 		};
 
-	    unitClass =_unit getVariable ['class', 'rifle'];
+	[_unit,_class] remoteExec ["fnc_addClassSwitchAction",_unit];
+	[_unit,_class] remoteExec ["fnc_addResupplyAction",_unit];
 
-    [_unit, [
-        format ["Switch to %1", _class],
-        {
-            params ["_target", "_caller", "_actionId", "_arguments"];
-
-            _targetClass = _target getVariable ['class','rifle'];
-            _callerClass = _caller getVariable ['class','rifle'];
-            [_caller,_targetClass] remoteExec ["fnc_SetWeaponWest",_caller];
-            _target setVariable ["commy_isLooted", true, true];
-            _caller setVariable ["class",_targetClass, true];
-            _target setVariable ["class","empty", true];
-        },
-        nil,
-        1.5,
-        false,
-        true,
-        "",
-        "!alive _target && {(_target getVariable ['class', 'empty'])!='empty'} && {(_target getVariable ['class','rifle'])!=(_this getVariable ['class','rifle'])} ",
-        50,
-        false,
-        "",
-        ""
-    ]] remoteExec ["addAction"];
-
-        [_unit, [
-        format ["Resupply for %1", _class],
-        {
-            params ["_target", "_caller", "_actionId", "_arguments"];
-
-            _targetClass = _target getVariable ['class','rifle'];
-            _callerClass = _caller getVariable ['class','rifle'];
-            [_caller,_targetClass] remoteExec ["fnc_AddAmmoWest",_caller];
-            _target setVariable ["class","empty", true];
-        },
-        nil,
-        1.5,
-        false,
-        true,
-        "",
-        "!alive _target && {(_target getVariable ['class', 'empty'])!='empty'} && {(_target getVariable ['class','rifle'])==(_this getVariable ['class','rifle'])} ",
-        50,
-        false,
-        "",
-        ""
-    ]] remoteExec ["addAction"];
 }; 
 
 ["CAManBase", "InitPost", _fnc_ititializeSoldier, nil, nil, true] call CBA_fnc_addClassEventHandler;
@@ -177,19 +187,6 @@ fnc_addRecruitAction = {
         ""
     ]] remoteExec ["addAction"];
 };
-
-fnc_make_classbox = {
-    params ["_unit"];
-    if (!local _unit) exitWith {};
-
-
-
-    [_unit, [
-        "Useless action",
-        {}
-    ]] remoteExec ["addAction"];
-};
-
 
 //["B_Survivor_F", "InitPost", _fnc_addRecruitAction, nil, nil, true] call CBA_fnc_addClassEventHandler;
 //["B_Survivor_F", "Respawn", _fnc_addRecruitAction] call CBA_fnc_addClassEventHandler;

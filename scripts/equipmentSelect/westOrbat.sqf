@@ -142,7 +142,6 @@ fnc_SetWeaponWest = {
 
 	    case "at": {
 
-
 			comment "Add containers";
 			for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};
 			_unit addItemToUniform "ACE_morphine";
@@ -162,6 +161,7 @@ fnc_SetWeaponWest = {
 
 			_unit addWeapon "CUP_arifle_M16A4_Base";
 			_unit addPrimaryWeaponItem "CUP_acc_Flashlight";
+			_unit addWeapon "CUP_launch_RPG7V";
 
 
 			_unit linkItem "ItemMap";

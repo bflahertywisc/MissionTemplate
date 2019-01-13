@@ -19,6 +19,7 @@ switch (_class) do {
     case "B_soldier_AR_F": {
     	"ar"
     };
+    case 'CUP_O_TK_Officer';
     case 'CUP_O_TK_Commander';
     case 'CUP_O_TK_Soldier_SL';
     case 'CUP_O_TK_SpecOps_TL';
@@ -33,6 +34,8 @@ switch (_class) do {
     case "B_Soldier_TL_F": {
     	"ftl"
     };
+    case 'CUP_B_US_Soldier_LAT';
+    case 'CUP_O_INS_Soldier_AT';
     case 'CUP_O_TK_Soldier_HAT';
     case 'CUP_O_TK_Soldier_GL';
     case 'CUP_O_TK_Soldier_LAT';
@@ -46,6 +49,7 @@ switch (_class) do {
     case "B_soldier_AA_F": {
     	"at"
     };
+    case 'I_soldier_F';
     case 'CUP_O_TK_Soldier_FNFAL_Night';
     case 'CUP_O_TK_Engineer';
     case 'CUP_O_TK_Soldier_Backpack';
@@ -73,6 +77,8 @@ switch (_class) do {
     case "B_soldier_AAA_F": {
     	"rifle"
     };
+    case 'CUP_B_US_Soldier_Marksman';
+    case 'CUP_O_TK_Sniper';
     case 'CUP_O_TK_Sniper_SVD_Night';
     case 'B_ghillie_ard_F';
     case 'CUP_O_TK_Spotter';
@@ -87,6 +93,7 @@ switch (_class) do {
     {
     	"marksman"
     };
+    case 'CUP_B_US_Medic';
     case 'CUP_O_TK_Medic';
 	case "B_medic_F";
 	case "B_recon_medic_F":

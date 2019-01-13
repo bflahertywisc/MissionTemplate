@@ -1,0 +1,1 @@
+[] execVM "QS_icons.sqf";

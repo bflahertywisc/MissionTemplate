@@ -162,6 +162,7 @@ if (!local _unit) exitWith {};
 
 			_unit addWeapon "CUP_arifle_M16A4_Base";
 			_unit addPrimaryWeaponItem "CUP_acc_Flashlight";
+			_unit addWeapon "CUP_launch_RPG7V";
 
 
 			_unit linkItem "ItemMap";
