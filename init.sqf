@@ -1,15 +1,7 @@
-#include "scripts\equipmentSelect\guerOrbat.sqf";
-#include "scripts\equipmentSelect\civOrbat.sqf";
-#include "scripts\equipmentSelect\westOrbat.sqf";
-#include "scripts\equipmentSelect\eastOrbat.sqf";
+
 #include "scripts\equipmentSelect\classLookup.sqf";
-
-//-----Settings ------
-
-missionNamespace setVariable ["allowedHelmetsWest",["CUP_H_CDF_H_PASGT_UN"]];
-missionNamespace setVariable ["allowedUniformsWest",["U_C_Man_casual_2_F","U_C_Man_casual_1_F","CUP_U_O_CHDKZ_Lopotev","U_C_Poloshirt_blue","U_C_Poloshirt_tricolour","U_Rangemaster","U_C_Man_casual_4_F"]];
-missionNamespace setVariable ["allowedHelmetsEast",["CUP_H_RUS_6B27"]];
-missionNamespace setVariable ["allowedUniformsEast",["U_C_Poloshirt_burgundy","U_C_Poloshirt_redwhite","CUP_B_USMC_Navy_Red","U_C_Man_casual_6_F"]];
+#include "scripts\equipmentSelect\initializeUnit.sqf";
+#include "scripts\equipmentSelect\giveEquipment.sqf";
 
 
 //-----End Settings ------
@@ -72,7 +64,7 @@ fnc_addResupplyAction ={
             params ["_target", "_caller", "_actionId", "_arguments"];
             _targetClass = _target getVariable ['class','rifle'];
             _target setVariable ["ammo_isLooted", true, true];
-            [_caller,_targetClass] remoteExec ["fnc_AddAmmoWest",_caller];
+            [_caller,_targetClass] remoteExec ["fnc_AddAmmo",_caller];
         },
         nil,
         1.5,
@@ -102,7 +94,8 @@ fnc_addClassSwitchAction ={
 
             _targetClass = _target getVariable ['class','rifle'];
             _callerClass = _caller getVariable ['class','rifle'];
-            [_caller,_targetClass] remoteExec ["fnc_SetWeaponWest",_caller];
+            _side = side _target;
+            [_caller,_targetClass,_side,false] remoteExec ["fnc_InitEquip",_caller];
             _target setVariable ["medic_isLooted", true, true];
             _caller setVariable ["class",_targetClass, true];
             _target setVariable ["class",_callerClass, true];
@@ -135,22 +128,7 @@ _fnc_ititializeSoldier = {
 
 	//diag_log format ["Initializing Soldier %1 with class %2 on side %3, Local?: %4", _unit, _class, _sideString, _local];
 
-		switch (_sideString) do {
-		    case "EAST": { 
-		   		[_unit,_class] remoteExec ["fnc_InitEast",_unit];
-		    };
-		    case "WEST": {
-		   		[_unit,_class] remoteExec ["fnc_InitWest",_unit];
-		    };
-		    case "GUER": {
-		   		[_unit,_class] remoteExec ["fnc_InitGuer",_unit];
-		    };
-		    case "CIV": {  
-		   		[_unit,_class] remoteExec ["fnc_IniCiv",_unit];
-		    };
-		    default {};
-		};
-
+	[_unit,_class,_side,true] remoteExec ["fnc_InitEquip",_unit];
 	[_unit,_class] remoteExec ["fnc_addClassSwitchAction",_unit];
 	[_unit,_class] remoteExec ["fnc_addResupplyAction",_unit];
 

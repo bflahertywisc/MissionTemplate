@@ -7,8 +7,11 @@ params ["_class","_side"];
 
 
 switch (_class) do {
-
-
+    case 'C_man_polo_3_F';
+    case 'C_man_shorts_4_F';
+    case 'C_man_polo_1_F';
+    case 'C_man_p_fugitive_F';
+    case 'C_Man_casual_1_F';
     case "B_Survivor_F": {
     	"survivor"
     };
@@ -19,6 +22,9 @@ switch (_class) do {
     case "B_soldier_AR_F": {
     	"ar"
     };
+    case 'O_Soldier_TL_F';
+    case 'O_support_GMG_F';
+    case 'O_officer_F';
     case 'CUP_O_TK_Officer';
     case 'CUP_O_TK_Commander';
     case 'CUP_O_TK_Soldier_SL';
@@ -49,14 +55,14 @@ switch (_class) do {
     case "B_soldier_AA_F": {
     	"at"
     };
+    case 'CUP_O_INS_Soldier_AK74';
+    case 'CUP_O_RU_Soldier';
     case 'I_soldier_F';
-    case 'CUP_O_TK_Soldier_FNFAL_Night';
     case 'CUP_O_TK_Engineer';
     case 'CUP_O_TK_Soldier_Backpack';
     case 'CUP_O_TK_Soldier_AAT';
     case 'CUP_O_TK_Soldier_AMG';
     case 'CUP_O_TK_Crew';
-    case 'CUP_O_TK_SpecOps';
     case 'CUP_O_TK_Soldier';
     case 'B_crew_F';
     case 'B_Fighter_Pilot_F';
@@ -70,16 +76,12 @@ switch (_class) do {
     case "B_spotter_F";
 	case "B_Soldier_A_F";
 	case "B_Soldier_F";
-    case "B_recon_exp_F";
-    case "B_recon_JTAC_F";
-	case "B_recon_F";
     case "B_soldier_AAT_F";
     case "B_soldier_AAA_F": {
     	"rifle"
     };
     case 'CUP_B_US_Soldier_Marksman';
-    case 'CUP_O_TK_Sniper';
-    case 'CUP_O_TK_Sniper_SVD_Night';
+    case 'CUP_O_TK_Sniper';   
     case 'B_ghillie_ard_F';
     case 'CUP_O_TK_Spotter';
     case 'CUP_O_TK_Sniper_KSVK';
@@ -87,9 +89,7 @@ switch (_class) do {
     case 'O_soldier_M_F';
     case 'CUP_B_BAF_Sniper_AS50_TWS_MTP';
 	case 'B_Sharpshooter_F';
-    case "B_Recon_Sharpshooter_F";
-	case "B_sniper_F";
-    case "B_recon_M_F":
+	case "B_sniper_F":
     {
     	"marksman"
     };
@@ -99,6 +99,22 @@ switch (_class) do {
 	case "B_recon_medic_F":
      {
     	"medic"
+    };
+    case 'O_recon_F';
+    case "B_recon_exp_F";
+    case "B_recon_JTAC_F";    
+    case "B_recon_F";
+    case 'CUP_O_TK_SpecOps';
+    case 'CUP_O_TK_Soldier_FNFAL_Night':
+    {
+        "reconRifleman"
+    };
+    case 'O_sniper_F';
+    case "B_recon_M_F";
+    case "B_Recon_Sharpshooter_F";
+    case 'CUP_O_TK_Sniper_SVD_Night':
+    {
+        "sniperNight"
     };
     default {
    	    diag_log format ["New %1 Definition needed",_side];	

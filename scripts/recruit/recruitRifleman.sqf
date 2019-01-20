@@ -36,3 +36,5 @@ _unit linkItem "ItemRadio";
 comment "Set identity";
 _unit setFace "WhiteHead_12";
 _unit setSpeaker "male01eng";
+
+[_unit] joinSilent (group player);
