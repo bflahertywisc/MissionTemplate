@@ -7,7 +7,9 @@
 //-----End Settings ------
 
 
-
+//Exec Vcom AI function
+[] execVM "Vcom\VcomInit.sqf";
+//End of Vcom commands
 
 
 // Plank Config
@@ -39,7 +41,8 @@ private _fnc_addMedLootAction = {
         {
             params ["_target", "_caller", "_actionId", "_arguments"];
             _target setVariable ["medic_isLooted", true, true];
-            _this execVM "scripts\loot\lootMedical.sqf";
+             _targetClass = _target getVariable ['class','rifle'];
+            [_caller,_targetClass] remoteExec ["fnc_AddMedical",_caller];
         },
         nil,
         1.5,

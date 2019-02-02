@@ -15,6 +15,7 @@ switch (_class) do {
     case "B_Survivor_F": {
     	"survivor"
     };
+    case 'O_Soldier_AR_F';
     case 'CUP_O_TK_Soldier_MG';
     case 'CUP_O_TK_SpecOps_MG';
     case 'CUP_B_US_Soldier_AR';
@@ -55,6 +56,7 @@ switch (_class) do {
     case "B_soldier_AA_F": {
     	"at"
     };
+    case 'CUP_O_INS_Soldier';
     case 'CUP_O_INS_Soldier_AK74';
     case 'CUP_O_RU_Soldier';
     case 'I_soldier_F';
@@ -93,6 +95,7 @@ switch (_class) do {
     {
     	"marksman"
     };
+    case 'O_medic_F';
     case 'CUP_B_US_Medic';
     case 'CUP_O_TK_Medic';
 	case "B_medic_F";
@@ -116,6 +119,25 @@ switch (_class) do {
     {
         "sniperNight"
     };
+    case 'O_engineer_F':
+    {
+        "engineer"
+    };
+    case 'O_soldier_exp_F':
+    {
+        "demoMan"
+    };
+    case 'B_soldier_UAV_F';
+    case 'I_soldier_UAV_F';
+    case 'O_soldier_UAV_F':
+    {
+        "uavOperator"
+    };
+    case 'C_scientist_F':
+    {
+        "scientist"
+    };
+
     default {
    	    diag_log format ["New %1 Definition needed",_side];	
     	diag_log format ["case '%1';",_class];	

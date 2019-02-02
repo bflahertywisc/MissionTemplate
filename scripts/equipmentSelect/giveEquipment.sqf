@@ -4,6 +4,8 @@ fnc_AddAmmo = {
 if (!local _unit) exitWith {};
 
 	switch (_class) do {
+		case "uavOperator";
+		case "engineer";
 	    case "rifle": {
 			_unit addItemToVest "CUP_HandGrenade_M67";
 			for "_i" from 1 to 4 do {_unit addItemToBackpack "CUP_30Rnd_556x45_Stanag";};
@@ -74,3 +76,34 @@ if (!local _unit) exitWith {};
 
 };
 
+fnc_AddMedical = {
+	params ["_unit","_class"];
+	switch (_class) do {
+		case "reconRifleman";
+		case "sniperNight";
+		case "marksman";
+		case "at";
+		case "ar";
+		case "survivor";
+	    case "rifle": {
+			_unit addItemToBackpack "ACE_epinephrine";
+			for "_i" from 1 to 2 do {_unit addItemToBackpack "ACE_morphine";};
+			for "_i" from 1 to 5 do {_unit addItemToBackpack "ACE_fieldDressing";};
+	   	};
+	    case "ftl": {
+			for "_i" from 1 to 2 do {_unit addItemToBackpack "ACE_epinephrine";};
+			for "_i" from 1 to 4 do {_unit addItemToBackpack "ACE_morphine";};
+			for "_i" from 1 to 10 do {_unit addItemToBackpack "ACE_fieldDressing";};
+	   	};
+	   	case "medic":{
+			for "_i" from 1 to 4 do {_unit addItemToBackpack "ACE_epinephrine";};
+			for "_i" from 1 to 8 do {_unit addItemToBackpack "ACE_morphine";};
+			for "_i" from 1 to 20 do {_unit addItemToBackpack "ACE_fieldDressing";};
+			for "_i" from 1 to 2 do {_unit addItemToBackpack "ACE_bloodIV_500";};
+	   	};
+	    default {};
+	};
+
+
+
+};

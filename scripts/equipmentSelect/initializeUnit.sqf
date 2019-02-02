@@ -37,33 +37,46 @@ missionNamespace setVariable ["allowedBackpacksGuer",["V_PlateCarrier2_blk"]];
 
 //Code
 fnc_InitEquip = {
-
-	params ["_unit","_class","_side"];
+	params ["_unit","_class","_side","_initial"];
 	if (!local _unit) exitWith {};
 	_unit setVariable ["class", _class, true];
 
-//Remove and Set Helmet
-	removeHeadgear _unit;
-	_helmetList  = missionNamespace getVariable (format["allowedHelmets%1",_side]);
-	_helmet = selectRandom _helmetList;
-	_unit addHeadgear _helmet;
+	if(_initial) then {
+			//Remove and Set Helmet
+			removeHeadgear _unit;
+			_helmetList  = missionNamespace getVariable (format["allowedHelmets%1",_side]);
+			_helmet = selectRandom _helmetList;
+			_unit addHeadgear _helmet;
 
-//Remove and Set Uniform
-	removeUniform _unit;
-	_uniformList  = missionNamespace getVariable (format["allowedUniforms%1",_side]);
-	_uniform = selectRandom _uniformList;
-	_unit forceAddUniform _uniform;
+			//Remove and Set Uniform
+			removeUniform _unit;
+			_uniformList  = missionNamespace getVariable (format["allowedUniforms%1",_side]);
+			_uniform = selectRandom _uniformList;
+			_unit forceAddUniform _uniform;
 
-//Vest
-	removeVest _unit;
-	_vest = missionNamespace getVariable (format["armorLite%1",_side]);
-	_unit addVest _vest;
+			//Vest
+			removeVest _unit;
+			_vest = missionNamespace getVariable (format["armorLite%1",_side]);
+			_unit addVest _vest;
+
+
+			switch (_class) do {
+				case "survivor": {
+					[_unit] remoteExec ["fnc_addRecruitAction"];
+				};
+				case "medic": {
+					_unit setVariable ["Ace_medical_medicClass", 1];
+				};
+			 	default {};
+		};
+	};
 
 	removeAllWeapons _unit;
 	removeAllItems _unit;
 	removeAllAssignedItems _unit;
-
-
+	removeBackpack _unit;
+	removeVest _unit;
+	removeGoggles _unit;
 	switch (_class) do {
 	    case "rifle": {
 
@@ -91,7 +104,34 @@ fnc_InitEquip = {
 			_unit linkItem "ItemRadio";
 
 	    };
+	    case "engineer": {
 
+	    	for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};
+			_unit addItemToUniform "ACE_morphine";
+			_unit addItemToUniform "ACE_Clacker";
+			_unit addItemToUniform "ACE_DefusalKit";
+			for "_i" from 1 to 2 do {_unit addItemToUniform "CUP_30Rnd_556x45_Stanag";};
+			_unit addVest "V_PlateCarrier2_blk";
+			for "_i" from 1 to 4 do {_unit addItemToVest "ACE_epinephrine";};
+			for "_i" from 1 to 8 do {_unit addItemToVest "ACE_morphine";};
+			for "_i" from 1 to 10 do {_unit addItemToVest "ACE_fieldDressing";};
+			for "_i" from 1 to 7 do {_unit addItemToVest "CUP_30Rnd_556x45_Stanag";};
+			for "_i" from 1 to 3 do {_unit addItemToVest "CUP_HandGrenade_M67";};
+			_unit addBackpack "B_AssaultPack_blk";
+			_unit addItemToBackpack "ToolKit";
+			_unit addItemToBackpack "MineDetector";
+			_unit addItemToBackpack "SatchelCharge_Remote_Mag";
+			for "_i" from 1 to 2 do {_unit addItemToBackpack "DemoCharge_Remote_Mag";};
+
+			_unit addWeapon "CUP_arifle_M16A4_Base";
+			_unit addPrimaryWeaponItem "CUP_acc_Flashlight";
+
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ItemWatch";
+			_unit linkItem "ItemRadio";
+
+	    };
 	    case "survivor": {
 
 			_unit linkItem "ItemMap";
@@ -99,10 +139,100 @@ fnc_InitEquip = {
 			_unit linkItem "ItemWatch";
 			_unit linkItem "ItemRadio";
 
-			[_unit] remoteExec ["fnc_addRecruitAction"];
+	    };
+
+	    case "scientist": {
+	    	removeUniform _unit;
+	    	_unit forceAddUniform "U_C_Scientist";
+
+			for "_i" from 1 to 3 do {_unit addItemToUniform "CUP_6Rnd_45ACP_M";};
+			_unit addVest "CUP_V_RUS_Smersh_1";
+			for "_i" from 1 to 5 do {_unit addItemToVest "ACE_M84";};
+			for "_i" from 1 to 5 do {_unit addItemToVest "SmokeShell";};
+			_unit addItemToVest "CUP_6Rnd_45ACP_M";
+			for "_i" from 1 to 2 do {_unit addItemToVest "CUP_PipeBomb_M";};
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ItemWatch";
+			_unit linkItem "ItemRadio";
 
 	    };
 
+	    case "demoMan": {
+	    	for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};
+			_unit addItemToUniform "ACE_morphine";
+			_unit addItemToUniform "Chemlight_blue";
+			_unit addItemToUniform "ACE_Clacker";
+			_unit addItemToUniform "ACE_DefusalKit";
+			for "_i" from 1 to 2 do {_unit addItemToUniform "CUP_30Rnd_556x45_Stanag";};
+			_unit addVest "V_PlateCarrier2_blk";
+			for "_i" from 1 to 3 do {_unit addItemToVest "APERSMine_Range_Mag";};
+			for "_i" from 1 to 2 do {_unit addItemToVest "ACE_epinephrine";};
+			for "_i" from 1 to 4 do {_unit addItemToVest "ACE_morphine";};
+			for "_i" from 1 to 5 do {_unit addItemToVest "ACE_fieldDressing";};
+			for "_i" from 1 to 2 do {_unit addItemToVest "CUP_30Rnd_556x45_Stanag";};
+			for "_i" from 1 to 2 do {_unit addItemToVest "CUP_HandGrenade_M67";};
+			_unit addBackpack "B_AssaultPack_blk";
+			_unit addItemToBackpack "MineDetector";
+			for "_i" from 1 to 3 do {_unit addItemToBackpack "APERSBoundingMine_Range_Mag";};
+			for "_i" from 1 to 2 do {_unit addItemToBackpack "ClaymoreDirectionalMine_Remote_Mag";};
+			for "_i" from 1 to 2 do {_unit addItemToBackpack "SLAMDirectionalMine_Wire_Mag";};
+			for "_i" from 1 to 3 do {_unit addItemToBackpack "DemoCharge_Remote_Mag";};
+			_unit addItemToBackpack "ATMine_Range_Mag";
+
+			_unit addWeapon "CUP_arifle_M16A4_Base";
+			_unit addPrimaryWeaponItem "CUP_acc_Flashlight";
+
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ItemWatch";
+			_unit linkItem "ItemRadio";
+
+
+	    };
+
+
+
+
+	    case "uavOperator": {
+	    	for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};
+			_unit addItemToUniform "ACE_morphine";
+			_unit addItemToUniform "Chemlight_blue";
+			for "_i" from 1 to 2 do {_unit addItemToUniform "CUP_30Rnd_556x45_Stanag";};
+			_unit addVest "V_PlateCarrier2_blk";
+			for "_i" from 1 to 4 do {_unit addItemToVest "ACE_epinephrine";};
+			for "_i" from 1 to 8 do {_unit addItemToVest "ACE_morphine";};
+			for "_i" from 1 to 10 do {_unit addItemToVest "ACE_fieldDressing";};
+			for "_i" from 1 to 7 do {_unit addItemToVest "CUP_30Rnd_556x45_Stanag";};
+			for "_i" from 1 to 3 do {_unit addItemToVest "CUP_HandGrenade_M67";};
+			_unit addBackpack "B_AssaultPack_blk";
+			for "_i" from 1 to 5 do {_unit addItemToBackpack "CUP_30Rnd_556x45_Stanag";};
+
+
+
+			_unit addWeapon "CUP_arifle_M16A4_Base";
+			_unit addPrimaryWeaponItem "CUP_acc_Flashlight";
+
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ItemWatch";
+			_unit linkItem "ItemRadio";
+
+	switch (_side) do {
+	    case "West": {
+			this linkItem "B_UavTerminal";
+		};
+		case "East": {
+			this linkItem "O_UavTerminal";
+		};
+		case "Civ": {
+			this linkItem "O_UavTerminal";
+		};
+		case "Guer": {
+			this linkItem "I_UavTerminal";
+		};
+    		};
+		};
 	    case "ar": {
 			comment "Add containers";
 			for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};
@@ -167,8 +297,6 @@ fnc_InitEquip = {
 		};
 
 	    case "at": {
-
-
 			comment "Add containers";
 			for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};
 			_unit addItemToUniform "ACE_morphine";
@@ -180,16 +308,18 @@ fnc_InitEquip = {
 			for "_i" from 1 to 10 do {_unit addItemToVest "ACE_fieldDressing";};
 			for "_i" from 1 to 7 do {_unit addItemToVest "CUP_30Rnd_556x45_Stanag";};
 			for "_i" from 1 to 3 do {_unit addItemToVest "CUP_HandGrenade_M67";};
-			_unit addBackpack "B_AssaultPack_blk";
+
 			for "_i" from 1 to 5 do {_unit addItemToBackpack "CUP_30Rnd_556x45_Stanag";};
-			_unit addItemToBackpack "CUP_OG7_M";
-			_unit addItemToBackpack "CUP_PG7V_M";
+
 
 
 			_unit addWeapon "CUP_arifle_M16A4_Base";
 			_unit addPrimaryWeaponItem "CUP_acc_Flashlight";
 			_unit addWeapon "CUP_launch_RPG7V";
 
+			_unit addBackpack "B_AssaultPack_blk";
+			_unit addItemToBackpack "CUP_OG7_M";
+			_unit addItemToBackpack "CUP_PG7V_M";
 
 			_unit linkItem "ItemMap";
 			_unit linkItem "ItemCompass";
