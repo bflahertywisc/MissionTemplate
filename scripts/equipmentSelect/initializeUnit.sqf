@@ -79,7 +79,6 @@ fnc_InitEquip = {
 	removeGoggles _unit;
 	switch (_class) do {
 	    case "rifle": {
-
 	    	for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};
 			_unit addItemToUniform "ACE_morphine";
 			_unit addItemToUniform "Chemlight_blue";
@@ -192,7 +191,157 @@ fnc_InitEquip = {
 	    };
 
 
+	    case "FTLMilitia": {
+	    	for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};
+			_unit addItemToUniform "ACE_morphine";
+			for "_i" from 1 to 3 do {_unit addItemToUniform "CUP_6Rnd_45ACP_M";};
+			for "_i" from 1 to 3 do {_unit addItemToUniform "CUP_1Rnd_HE_M203";};
+			_unit addItemToUniform "CUP_1Rnd_Smoke_M203";
+			_unit addVest "V_PlateCarrier2_blk";
+			for "_i" from 1 to 2 do {_unit addItemToVest "CUP_HandGrenade_L109A1_HE";};
+			for "_i" from 1 to 3 do {_unit addItemToVest "SmokeShell";};
+			for "_i" from 1 to 3 do {_unit addItemToVest "CUP_6Rnd_45ACP_M";};
+			for "_i" from 1 to 2 do {_unit addItemToVest "MiniGrenade";};
+			_unit addBackpack "B_AssaultPack_blk";
+			for "_i" from 1 to 2 do {_unit addItemToBackpack "1Rnd_SmokeGreen_Grenade_shell";};
+			for "_i" from 1 to 5 do {_unit addItemToBackpack "1Rnd_Smoke_Grenade_shell";};
+			for "_i" from 1 to 4 do {_unit addItemToBackpack "CUP_1Rnd_StarFlare_White_M203";};
+			for "_i" from 1 to 10 do {_unit addItemToBackpack "1Rnd_HE_Grenade_shell";};
+			for "_i" from 1 to 20 do {_unit addItemToBackpack "ACE_fieldDressing";};
+			for "_i" from 1 to 10 do {_unit addItemToBackpack "ACE_epinephrine";};
+			for "_i" from 1 to 5 do {_unit addItemToBackpack "ACE_morphine";};
 
+
+			_unit addWeapon "CUP_glaunch_M79";
+			_unit addWeapon "CUP_hgun_TaurusTracker455_gold";
+			_unit addWeapon "Binocular";
+
+
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ItemWatch";
+			_unit linkItem "ItemRadio";
+	    };
+
+
+
+	    case "rifleMilitia": {
+
+			for "_i" from 1 to 2 do {_unit addItemToUniform "CUP_10x_303_M";};
+			_unit addVest "V_PlateCarrier2_blk";
+			for "_i" from 1 to 2 do {_unit addItemToVest "CUP_HandGrenade_L109A1_HE";};
+			for "_i" from 1 to 10 do {_unit addItemToVest "SmokeShell";};
+			for "_i" from 1 to 5 do {_unit addItemToVest "CUP_10x_303_M";};
+			_unit addBackpack "CUP_B_AlicePack_Khaki";
+
+			_unit addWeapon "CUP_srifle_LeeEnfield";
+
+
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ItemWatch";
+			_unit linkItem "ItemRadio";
+	    };
+
+
+	    case "MedicMilitia": {
+
+			for "_i" from 1 to 2 do {_unit addItemToUniform "CUP_10x_303_M";};
+			_unit addVest "V_PlateCarrier2_blk";
+			for "_i" from 1 to 2 do {_unit addItemToVest "CUP_HandGrenade_L109A1_HE";};
+			for "_i" from 1 to 10 do {_unit addItemToVest "SmokeShell";};
+			for "_i" from 1 to 5 do {_unit addItemToVest "CUP_10x_303_M";};
+			_unit addBackpack "CUP_B_AlicePack_Khaki";
+			for "_i" from 1 to 100 do {_unit addItemToBackpack "ACE_fieldDressing";};
+			for "_i" from 1 to 10 do {_unit addItemToBackpack "ACE_bloodIV_500";};
+			for "_i" from 1 to 20 do {_unit addItemToBackpack "ACE_epinephrine";};
+			for "_i" from 1 to 40 do {_unit addItemToBackpack "ACE_morphine";};
+
+
+
+			_unit addWeapon "CUP_srifle_LeeEnfield";
+
+
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ItemWatch";
+			_unit linkItem "ItemRadio";
+	    };
+
+
+
+	    case "ATMilitia": {
+
+			for "_i" from 1 to 2 do {_unit addItemToUniform "CUP_10x_303_M";};
+			_unit addVest "V_PlateCarrier2_blk";
+			for "_i" from 1 to 4 do {_unit addItemToVest "ACE_epinephrine";};
+			for "_i" from 1 to 8 do {_unit addItemToVest "ACE_morphine";};
+			for "_i" from 1 to 10 do {_unit addItemToVest "ACE_fieldDressing";};
+			for "_i" from 1 to 5 do {_unit addItemToVest "CUP_10x_303_M";};
+			_unit addBackpack "CUP_B_AlicePack_Khaki";
+			for "_i" from 1 to 2 do {_unit addItemToBackpack "CUP_PG7V_M";};
+
+			_unit addWeapon "CUP_srifle_LeeEnfield";
+			_unit addWeapon "CUP_launch_RPG7V";
+
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ItemWatch";
+			_unit linkItem "ItemRadio";
+	    };
+
+	    case "ARMilitia": {
+	    	for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};
+			_unit addItemToUniform "ACE_morphine";
+			_unit addItemToUniform "Chemlight_blue";
+			for "_i" from 1 to 2 do {_unit addItemToUniform "CUP_30Rnd_556x45_Stanag";};
+			_unit addVest "V_PlateCarrier2_blk";
+			for "_i" from 1 to 4 do {_unit addItemToVest "ACE_epinephrine";};
+			for "_i" from 1 to 8 do {_unit addItemToVest "ACE_morphine";};
+			for "_i" from 1 to 10 do {_unit addItemToVest "ACE_fieldDressing";};
+			for "_i" from 1 to 7 do {_unit addItemToVest "CUP_30Rnd_556x45_Stanag";};
+			for "_i" from 1 to 3 do {_unit addItemToVest "CUP_HandGrenade_M67";};
+			_unit addBackpack "B_AssaultPack_blk";
+			for "_i" from 1 to 5 do {_unit addItemToBackpack "CUP_30Rnd_556x45_Stanag";};
+
+
+
+			_unit addWeapon "CUP_arifle_M16A4_Base";
+			_unit addPrimaryWeaponItem "CUP_acc_Flashlight";
+
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ItemWatch";
+			_unit linkItem "ItemRadio";
+
+	    };
+
+
+	    case "MarksmanMilitia": {
+	    	for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};
+			_unit addItemToUniform "ACE_morphine";
+			_unit addItemToUniform "Chemlight_blue";
+			for "_i" from 1 to 2 do {_unit addItemToUniform "CUP_5x_22_LR_17_HMR_M";};
+			_unit addVest "V_PlateCarrier2_blk";
+			for "_i" from 1 to 4 do {_unit addItemToVest "ACE_epinephrine";};
+			for "_i" from 1 to 8 do {_unit addItemToVest "ACE_morphine";};
+			for "_i" from 1 to 10 do {_unit addItemToVest "ACE_fieldDressing";};
+			for "_i" from 1 to 7 do {_unit addItemToVest "CUP_5x_22_LR_17_HMR_M";};
+			for "_i" from 1 to 3 do {_unit addItemToVest "CUP_HandGrenade_M67";};
+			_unit addBackpack "B_AssaultPack_blk";
+			for "_i" from 1 to 5 do {_unit addItemToBackpack "CUP_6Rnd_45ACP_M";};
+
+
+			_unit addWeapon "CUP_srifle_CZ550";
+			_unit addWeapon "CUP_hgun_TaurusTracker455";
+
+
+			_unit linkItem "ItemMap";
+			_unit linkItem "ItemCompass";
+			_unit linkItem "ItemWatch";
+			_unit linkItem "ItemRadio";
+
+	    };
 
 	    case "uavOperator": {
 	    	for "_i" from 1 to 2 do {_unit addItemToUniform "ACE_fieldDressing";};

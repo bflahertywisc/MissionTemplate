@@ -119,10 +119,12 @@ switch (_class) do {
     {
         "sniperNight"
     };
+    case 'CUP_O_TK_INS_Mechanic';
     case 'O_engineer_F':
     {
         "engineer"
     };
+    case 'CUP_O_TK_INS_Bomber';
     case 'O_soldier_exp_F':
     {
         "demoMan"
@@ -136,6 +138,42 @@ switch (_class) do {
     case 'C_scientist_F':
     {
         "scientist"
+    };
+    case 'CUP_O_TK_INS_Sniper';
+    case 'CUP_B_BAF_Soldier_scout_MTP':
+    {
+        "MarksmanMilitia"
+    };
+    case 'CUP_O_TK_INS_Commander';
+    case 'CUP_O_TK_INS_Soldier_GL';
+    case 'CUP_O_TK_INS_Soldier_TL';
+    case 'CUP_B_BAF_Soldier_TL_MTP':
+    {
+        "FTLMilitia"
+    };
+    case 'CUP_O_TK_INS_Guerilla_Medic';
+    case 'CUP_B_BAF_Medic_MTP':
+    {
+        "MedicMilitia"
+    };
+    case 'CUP_O_TK_INS_Soldier_AA';
+    case 'CUP_O_TK_INS_Soldier_AT';
+    case 'CUP_B_BAF_Soldier_AT_MTP':
+    {
+        "ATMilitia"
+    };
+    case 'CUP_O_TK_INS_Soldier_MG';
+    case 'CUP_O_TK_INS_Soldier_AR';
+    case 'CUP_B_BAF_Soldier_AR_MTP':
+    {
+        "ARMilitia"
+    };
+    case 'CUP_O_TK_INS_Soldier_AAT';
+    case 'CUP_O_TK_INS_Soldier_Enfield';
+    case 'CUP_O_TK_INS_Soldier_FNFAL';
+    case 'CUP_O_TK_INS_Soldier':
+    {
+        "rifleMilitia"
     };
 
     default {
