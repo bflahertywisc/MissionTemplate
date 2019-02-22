@@ -104,6 +104,7 @@ fnc_addClassSwitchAction ={
             _target setVariable ["class",_callerClass, true];
             _target removeAction _actionID;
             [_target,_callerClass]remoteExec ["fnc_addClassSwitchAction"];
+
         },
         nil,
         1.5,
@@ -111,6 +112,32 @@ fnc_addClassSwitchAction ={
         true,
         "",
         "!alive _target && {(_target getVariable ['class','rifle'])!=(_this getVariable ['class','rifle'])} ",
+        50,
+        false,
+        "",
+        ""
+    ]] remoteExec ["addAction"];
+};
+
+
+fnc_addTakeAddonAction ={
+    params ["_unit","_addon"];
+    if (!local _unit) exitWith {};
+    [_unit, [
+        format ["Take %1", _addon],
+        {
+            params ["_target", "_caller", "_actionId", "_arguments"];
+            _addon = _arguments select 0;
+            [_caller,_addon] remoteExec ["fnc_AddAddon",_caller];
+           
+           [_target, _actionID] remoteExec ["removeAction"];
+        },
+        [_addon],
+        1.5,
+        false,
+        true,
+        "",
+        "!alive _target",
         50,
         false,
         "",
@@ -132,8 +159,6 @@ _fnc_ititializeSoldier = {
 	//diag_log format ["Initializing Soldier %1 with class %2 on side %3, Local?: %4", _unit, _class, _sideString, _local];
 
 	[_unit,_class,_side,true] remoteExec ["fnc_InitEquip",_unit];
-	[_unit,_class] remoteExec ["fnc_addClassSwitchAction",_unit];
-	[_unit,_class] remoteExec ["fnc_addResupplyAction",_unit];
 
 }; 
 

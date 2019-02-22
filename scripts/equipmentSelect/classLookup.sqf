@@ -47,13 +47,12 @@ switch (_class) do {
     case 'CUP_O_TK_Soldier_GL';
     case 'CUP_O_TK_Soldier_LAT';
     case 'CUP_O_TK_Soldier_AT';
-    case 'CUP_O_TK_Soldier_AA';
 	case 'O_Soldier_LAT_F';
     case 'CUP_B_US_Soldier_AT';
     case "B_recon_LAT_F";
     case "B_soldier_LAT_F";
-    case "B_soldier_AT_F";
-    case "B_soldier_AA_F": {
+    case "B_soldier_AT_F":
+     {
     	"at"
     };
     case 'CUP_O_INS_Soldier';
@@ -174,6 +173,12 @@ switch (_class) do {
     case 'CUP_O_TK_INS_Soldier':
     {
         "rifleMilitia"
+    };
+    case 'CUP_O_TK_Soldier_AA';
+    case "B_soldier_AA_F";
+    case 'CUP_O_TK_Soldier_AA':
+    {
+        "aa"
     };
 
     default {
