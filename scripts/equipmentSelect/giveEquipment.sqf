@@ -179,7 +179,6 @@ fnc_AddAddon = {
 			for "_i" from 1 to 3 do {_unit addItemToBackpack "ACE_HuntIR_M203";};
 		};
 		case "Colored Smoke": {
-		+
 			_unit addItemToBackpack "SmokeShellBlue";
 			_unit addItemToBackpack "SmokeShellRed";
 			_unit addItemToBackpack "SmokeShellGreen";

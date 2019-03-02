@@ -2,7 +2,9 @@
 #include "scripts\equipmentSelect\classLookup.sqf";
 #include "scripts\equipmentSelect\initializeUnit.sqf";
 #include "scripts\equipmentSelect\giveEquipment.sqf";
-
+#include "scripts\equipmentSelect\makeEquipmentBox.sqf";
+#include "scripts\cheats\cheatSpawner.sqf";
+#include "Tracer.sqf";
 
 //-----End Settings ------
 

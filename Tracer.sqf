@@ -36,11 +36,11 @@ addMissionEventHandler ["Draw3D", {
 }];
  
 //Adding of the option to manually clear lines.  If you don't want the addaction, simply remove these 4 lines
-(player) addAction["Clear Lines", {
-    {
-        [_x] call hyp_fnc_traceFireClear;
-    } forEach hyp_var_tracer_tracedUnits;
-}]; //Clears the lines of all drawn projectiles
+//(player) addAction["Clear Lines", {
+//   {
+//        [_x] call hyp_fnc_traceFireClear;
+//    } forEach hyp_var_tracer_tracedUnits;
+//}]; //Clears the lines of all drawn projectiles
  
  
 /*

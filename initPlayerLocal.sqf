@@ -26,3 +26,6 @@ _player addAction [
     "",
     ""
 ];
+
+
+[] execVM "QS_icons.sqf";

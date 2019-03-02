@@ -205,8 +205,6 @@ fnc_InitEquip = {
 
 			_class = "rifle";
 
-
-
 	    };
 
 
